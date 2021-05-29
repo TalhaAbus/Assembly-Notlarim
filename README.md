@@ -65,6 +65,35 @@ Basla:
 
 -------------------------------------
 
+1. Başlangıç değeri ne? (Aşağı veya yukarı olabilir) Bizde yukarı sayıyor.
+
+100 tane saymak istiyorsak 65435'ten başlatıp 65535'te bayrağı taşıracağız.
+
+-------------------------------------
+Örnek Ayar:
+
+    org 00h
+    sjmp ayar
+
+ayar:
+    mov TMOD, #00000101B -> sondaki 2 tanesi MOD1 (16 bitlik sayıcı olup olmadığını ayarlıyor) Sonraki 1 değeri counter olduğunu ayarladı.
+                                                  (Sonraki 0 değeri gate, Dışardan başlatma olayı)
+                                                  (65435 değerini TL0 ve TH0 registerlarına kaydedilecek)
+    mov TL0,#9Bh
+    mov TH0,#0FFh
+                  (65435 değerine ayarlamış olduk)
+    setb TR0
+                  (Zamanlayıcı başladı)
+x: 
+
+    jnb TF0,x
+    clr TF0,
+    mov TL0, #9Bh
+    mov TH0, #0FFh
+    cpl P1.0 (Görev)
+    
+    sjmp x
+----------------------------------------
 
 
 
