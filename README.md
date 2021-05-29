@@ -95,6 +95,13 @@ x:
     sjmp x
 ----------------------------------------
 
+DERS 11: TIMER COUNTER T/C
+
+100 tane paket sayalım,
+
+org     ooh
+sjmp    ayar
+
 
 
 
