@@ -2,10 +2,10 @@
 2021 Yılıından itibaren assembly dili ile 8051 ve Aduc 841 Derslerimden Notlar
 
 Ders 10:
-
+----------------
 Piyasaya argeci olarak çıkılırsa en az 100 farklı marka mikroişlemci ile karşılaşılacak (8051, ARM, Intel, Atmel, PIC, TI)
 Temel üzerine anlatılan bu ders iyi öğrenildiği taktirde diğer mikroişlemcilere geçil yapıldığında hızlı şekilde çözümleme yapılabiliyor.
-Amaç 8051 öğrenmek değil, mikroişlemci temellerini öğrenmektir, bir ta nesini iyi öğrendikten sonra diğerkerini ızlı bir şekilde öğrenebiliriz.
+Amaç 8051 öğrenmek değil, mikroişlemci temellerini öğrenmektir, bir ta nesini iyi öğrendikten sonra diğerkerini hızlı bir şekilde öğrenilebilir..
 
 8051 standartı: 
 5 çevre birimi:
@@ -93,20 +93,56 @@ x:
     cpl P1.0 (Görev)
     
     sjmp x
-----------------------------------------
+
 
 DERS 11: TIMER COUNTER T/C
-
+----------------------------------------------------------------
 100 tane paket sayalım,
-
+----------------
 org     ooh
 sjmp    ayar
 
+ayar:  mov TMOD, #xxxx0101B (gate- counter ve mod 1 ayarlandı)
+//65535 - 100
+DPTR= DPH + DPL
+65435d değerini direkt DPTR verirsek DPH ve DPL atama yapıyor
+mov DPTR, #65435d
+mov TL0, DPL
+mov TH0, DPH
+setb TR0   
+x: jnb TF0, x
+clr TF0
+mov TL0, DPL
+mov TH0, DPH
+clr TF0(dersek sayıcı durur)
+cpl P1.0 (Görev)
+
+sjmp x
 
 
+5 ms'de 1 ledin cpl alalım ->
+-----------------
+osc = 110592 Mhz ise 
 
+1 saniye geçmesi için sayılması gereken osilator miktarı 11059200 adet
+5 milisaniye için 55296 adet say
 
+sjmp ayar
+ayar: 
+mov TMOD, #0001xxxxB
+mov DPTR, #10239d
+mov TL1, DPL
+mov TH1, DPH
+setb TR1
+x:
+jnb  TF1, x
+clr TF1
+mov TL1, DPL
+mov TH1, DPH
+cpl P1.0
+sjmp x
 
+-----------------------
 
 
 
