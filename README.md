@@ -142,7 +142,41 @@ mov TH1, DPH
 cpl P1.0
 sjmp x
 
------------------------
+----------------------------
+Mod1 Sayıcı
+---
+Gate 1 ise sayıcı dışarıdan başlatılır.
+setb TR0 dersen bile sayıcı çalışmaz(Gate 1 olduğu için)
+(Notlar sayfa 109)
+
+Kesmeler
+---
+Kimler kesme üretebilir?
+Timerlar, ADC, Seri port, I/O
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
