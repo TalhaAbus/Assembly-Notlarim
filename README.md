@@ -154,6 +154,109 @@ Kesmeler
 Kimler kesme üretebilir?
 Timerlar, ADC, Seri port, I/O
 
+Harici kesme 0 gelmişse ->      0003h
+Timer 0 kesemsi gelmişse ->     000Bh
+Harici kesme 1 gelmişse ->      0012h
+Timer 1 kesmesi gelmişse ->     001Bh
+                                        adreslerine gidiyor.
+
+Harici kesme 0 için
+---
+org 00h
+smjp    ayar
+        (Harici 0 kesmesi düşen kenar)
+setb    it0 (Düşen kenar kesmesi aktif)
+setb    ex0 (Harici kesme aktif) (et0 deseydim timmer kesmesi aktif olacaktı)
+setb    ea (Tüm kesmeler aktif)
+
+--------
+Hafta 12 ADC
+---
+Analog - Digital
+
+Bir derece var, biz bu dereceyi sensör ile gerilime dönüştürüyoruz. O gerilimden gelen çıktıları
+    bilgisayara girdik. Bunlar da 0-4095 arasındaki sayılara dönüşüyor.
+
+Analog veriyi mikroişlemcinin içine sayı olarak almak istiyoruz, o yüzden ADC bağlıyoruz ve
+    bu ADC'nin bir referans gerilimi var.(Vref)
+
+Kaç bitlik ADC?
+Aduc841 12 bitlik bir ADC (Girilen verileri 12bit olarak geri veriyor).
+    Maksimumda 2^12-1 değerini verecek.
+
+100 Derecede -> 5V      -> 1111 1111 1111 Değeri verecek (4095)
+50  Derecede -> 2,5V    -> 2048
+0 Derecede   -> 0V      -> 0
+
+Vref ne demek?
+---
+-> bana Vref gelirse ben 4095 üretirim.(12 bit için)
+
+Çözünürlük -> 5/4095 (ADC/Bit sayısı)
+Bit değeri arttıkça hassaslık artacak.
+ADC değerleri kesinlikle hatalıdır. Fakat bu hata payını ADC bit'ine göre azaltabilir.
+    8 bitlik bir ADC kullanırsak hata çok daha fazla büyüyecek, genel olarak 12 bit ADC yeterlidir.
+ADC içinde bir mux yapısı var, Seçiciler ile girişlerdeki hangi pini ölçeceğini belirliyor(2 giriş aynı anda okunamıyor)
+ADC dahili referansı var (2,5V), istersen bunu kullanırsın istersen de harici bir Vref bağlarsın.
+
+ADC 4 türlü çalışıyor ->
+---
+    ADC'yi direkt çalıştırabilirsin. Bitiyor bir daha çalışmıyor sen tekrar başlatıyorsun. (setb sconv)
+    ADC yi durmadan çalıştırabilişrsin  (setb cconv) Continious conversion
+    Dışardan başlatmak. (External start)    Buton bağlanır ve buton ile başlatılır.
+    Timer 2 ile başlatılır. 16 bitlik bir timerdır. 65535'ten sonra taşma olunca ADC otomatik başlıyor.
+
+Kanal 1'den gelen örneği okuyalım
+---
+
+    #include "aduc841.h"
+    sjmp    ayar
+
+ayar: 
+
+    mov     addcon1, #10111100b // mdi dahili ref
+    mov     addcon2, #00000001b // 1. kanal seçildi
+y:  setb    sconv   //adc calisti
+                    //bekle cevrim bitmesi
+                    //adci=1 oldun mu
+x:  jnb     adci,x
+    clr     adci    //bayragi temizle
+    mov     a,#0Fh
+    anl     a,ADCDATAH
+    mov     r0,a
+    mov     r1,ADCDATAL
+    sjmp    x
+    
+    end
+    
+Hafta 14:   DAC
+---
+
+2 Adet DAC'ımız var. DAC0, DAC1. Aynı anda 2 analog çıkış üretebiliriz. (0 ile referans gerilimi arasında)
+
+DACCON register -> Notlar sayfa 138 bak.
+
+SYNC = 1 ise direkt çıkış oluşur.
+SYNC = 0 ise DAC'lar çalışmıyor.
+
+Aynı anda nasıl çıkış alırız? 
+    DAC'ların low'larına veri yazıldığı anda çıkış başlar. (İlk önce high lar yazılır)
+    İkisii aynı andan çalıştırmak istiyorsan SYNC=0 yap, verileri yaz sonra SYNC=1 yaz.
+    
+Hafta 15: PWM
+---
+10 ms yakıyoruz 10 ms söndürüyoruz. O kadar hızlı oluyor ki göremiyoruz. 5V ve 0V -> bunu 2.5 volt olarak görüyoruz.
+Maksimum 6000rpm motoru %50 ile 3000 rpm döndürürüz. Darbe genişliğini ayarlıyoruz.
+
+Periyot ne?
+Bunun ne kadarı Ton?
+
+PWM bir timer'dır. Kesmesi yok. Osilatör sayıyor.
+2 tane PWM var -> PWM0, PWM1 
+PWM0H, PWM0L
+PWM1H, PWM1L
+
+
 
 
 
