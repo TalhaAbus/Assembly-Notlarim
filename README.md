@@ -303,17 +303,35 @@ PWM1H, PWM1L
 
 - Yukarıdaki adımlar, bir working register'ın genel işleyişini açıklar, ancak belirtmek önemlidir ki, belirli bir işlemcinin veya bilgisayarın tasarımına bağlı olarak bu işleyiş değişebilir. Bazı sistemlerde, working register aynı zamanda bir akümülatör işlevi de görebilir. Diğer sistemlerde, bir veya daha fazla working register, genel amaçlı registerlar olarak hizmet verebilir ve bir dizi farklı işlem için veri saklayabilir.
 
+### Stack pointer
 
+- Bilgisayar biliminde "stack" (Türkçe'de "yığın" olarak da ifade edilir), belirli bir veri tipinden öğelerin düzenli bir şekilde saklandığı bir veri yapısıdır. Stack, Last-In-First-Out (LIFO) prensibine göre çalışır, yani en son eklenen öğe ilk olarak çıkarılır.
 
+- Stack'in işlevi biraz bir yığın tabağa veya kitaba benzetilebilir. Yeni bir tabak veya kitap eklediğinizde, bu genellikle yığının en üstüne gelir. Bir tabağı veya kitabı çıkarmak istediğinizde, genellikle en üstte olanı alırsınız.
 
+- Bilgisayar sistemlerinde, stack genellikle iki ana işlev görür:
 
+1. **Alt Rutinler/Fonksiyonlar:** Bir programın çeşitli fonksiyonları ve prosedürleri, çoğunlukla stack üzerinde çalışır. Bir fonksiyon çağrıldığında, çağrılan fonksiyonun bilgileri (parametreler, dönüş adresi vb.) stack üzerine "push" (yığına eklenir) edilir. Fonksiyon tamamlandığında, bu bilgiler stack'ten "pop" (yığından çıkarılır) edilir ve kontrol çağrıyı yapan koda geri döner.
 
+2. **Geçici Depolama:** Stack, bir program tarafından kullanılan geçici verileri depolamak için de kullanılabilir. Bir program, bir değeri daha sonra kullanmak üzere stack üzerine ekleyebilir ve bu değeri ihtiyaç duyduğunda stack'ten çıkarabilir.
 
+- Stack genellikle RAM'de (Rastgele Erişimli Bellek) bulunur ve işlemci tarafından kullanılır. İşlemcinin bir "stack pointer" adlı özel bir register'ı vardır, bu pointer stack'in en üstündeki öğenin konumunu gösterir. Bir öğe stack'e eklenirken veya stack'ten çıkarılırken, stack pointer buna uygun olarak güncellenir.
 
+- Stack Pointer (SP), bir bilgisayarın merkezi işlem biriminin (CPU) bir parçası olan bir tür register'dir. Stack pointer, genellikle bilgisayarın belleğindeki bir stack (yığın) veri yapısının en üstündeki (veya bazen en altındaki) öğenin konumunu belirler.
 
+- Stack, Last-In-First-Out (LIFO) prensibine göre çalışan bir veri yapısıdır. Yeni bir öğe eklediğinizde (push işlemi), bu en üste gelir ve bir öğeyi çıkardığınızda (pop işlemi) genellikle en üstteki öğeyi alırsınız.
 
+- Stack pointer'ın işleyişi aşağıdaki gibi olabilir:
 
+1. Stack pointer, başlangıçta stack'in en üst noktasını gösterir.
 
+2. Bir öğe stack'e eklenmek istendiğinde (push), stack pointer, bellekteki yeni öğenin konumuna ilerler ve yeni öğe bu konuma yazılır.
+
+3. Bir öğe stack'den çıkarıldığında (pop), stack pointer en son eklenen öğeyi gösterir ve bu öğeyi alır, ardından stack'in bir önceki öğesini göstermek üzere geri ilerler.
+
+4. Stack pointer ayrıca, alt rutinler (fonksiyonlar veya prosedürler) ve kesmeler (interrupts) gibi işlemler sırasında program sayacının eski değerini saklamak için kullanılır. Bu, alt rutinin veya kesmenin tamamlanmasının ardından işlemcinin nereden devam edeceğini belirler.
+
+- Bu adımlar, stack pointer'ın genel işleyişini tanımlar. Ancak, belirli bir işlemci veya bilgisayar sisteminin tasarımına bağlı olarak bu işleyiş biraz değişebilir. Örneğin, bazı sistemlerde stack yukarı doğru büyür (yani, yeni öğeler daha yüksek bellek adreslerine eklenir), diğerlerinde ise aşağı doğru büyür. Bu durum, stack pointer'ın yeni öğeler eklenirken veya mevcut öğeler çıkarılırken nasıl hareket edeceğini belirler.
 
 
 
