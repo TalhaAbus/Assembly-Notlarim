@@ -267,13 +267,23 @@ PWM1H, PWM1L
 
 - Ancak, modern mikroişlemcilerde ALU ve akümülatör arasındaki bağlantı biraz daha karmaşık hale gelmiştir. Mikroişlemciler genellikle çoklu ALU'lara ve genel amaçlı kayıtlara (akümülatörün daha genelleştirilmiş bir versiyonu) sahiptir ve bu kayıtlar, çeşitli işlemler için gerekli verileri ve sonuçları tutmak için kullanılır. Bu, mikroişlemcilerin karmaşık işlemleri daha hızlı bir şekilde gerçekleştirmesine olanak sağlar.
 
+### PC (Program Counter)
 
+- Program Sayacı (Program Counter veya PC), bilgisayarın merkezi işlem birimi (CPU) içindeki bir register'dir. PC, genellikle bir sonraki komutun bellekte (genellikle RAM'de) nerede bulunduğunu belirten bir adresi saklar. İşlemci bu adresi kullanarak bellekten ilgili komutu alır, işler ve ardından program sayacını bir sonraki komuta ilerletir.
 
+- Program sayacının işleyiş şekli aşağıdaki gibidir:
 
+1. Bilgisayarın başlatılması veya bir programın çalıştırılmasının başlaması ile program sayacı, programın ilk komutunun adresini saklar.
 
+2. CPU, program sayacının gösterdiği adresteki komutu bellekten alır ve işler.
 
+3. İşlem tamamlandığında, program sayacı genellikle bir sonraki komutun adresine otomatik olarak ilerler. Bu genellikle mevcut adresin bir veya birkaç birim artırılması anlamına gelir, çünkü çoğu program komutları sıralı olarak yerleştirir.
 
+4. Ancak, bazı komutlar (örneğin, bir döngüyü başlatan veya bitiren komutlar, bir alt rutine atlayan komutlar veya koşullu bir ifadeye dayalı olarak farklı bir komuta atlayan komutlar) program sayacının değerini doğrudan değiştirebilir. Bu durumda, program sayacı belirtilen yeni adrese atlar ve CPU bu adresten yeni komutu alır.
 
+5. Bu işlem, bir programın sonuna ulaşılıncaya veya bilgisayarın kapatılmasına kadar devam eder.
+
+- Program sayacının işlevi, CPU'nun hangi komutu ne zaman işleyeceğini belirlemek olduğundan, program sayacı, bir bilgisayarın işlemlerini düzenli ve öngörülebilir bir şekilde sıralamasını sağlar.
 
 
 
