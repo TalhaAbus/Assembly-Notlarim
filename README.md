@@ -258,15 +258,15 @@ PWM1H, PWM1L
 
 ### ALU (Aritmetic Logic Unit)
 
-```
-ALU, Aritmetik ve Mantıksal Birim (Arithmetic Logic Unit) anlamına gelir. Bilgisayarın işlemci (CPU) bileşeninin bir parçasıdır. Temel aritmetik (toplama, çıkarma, çarpma, bölme) ve mantıksal (AND, OR, NOT, XOR vb.) işlemleri gerçekleştirmekten sorumludur.
 
-ALU'nun çıktısı genellikle bir akümülatöre yazılır. Akümülatör, işlemci içindeki bir tür kayıttır (register). ALU tarafından gerçekleştirilen aritmetik ve mantıksal işlemlerin sonuçlarını tutar. İşlemci, bu sonuçları daha sonraki işlemler için kullanabilir.
+- ALU, Aritmetik ve Mantıksal Birim (Arithmetic Logic Unit) anlamına gelir. Bilgisayarın işlemci (CPU) bileşeninin bir parçasıdır. Temel aritmetik (toplama, çıkarma, çarpma, bölme) ve mantıksal (AND, OR, NOT, XOR vb.) işlemleri gerçekleştirmekten sorumludur.
 
-Örneğin, bir program, 5 ve 3'ün toplanmasını talep ettiğinde, bu sayılar ALU'ya aktarılır. ALU, bu iki sayıyı toplar ve sonucu (8) akümülatöre yazar. Bu değer daha sonra program tarafından talep edildiğinde akümülatörden alınabilir. Bu, ALU ve akümülatör arasındaki temel bağlantıyı örneklemektedir.
+- ALU'nun çıktısı genellikle bir akümülatöre yazılır. Akümülatör, işlemci içindeki bir tür kayıttır (register). ALU tarafından gerçekleştirilen aritmetik ve mantıksal işlemlerin sonuçlarını tutar. İşlemci, bu sonuçları daha sonraki işlemler için kullanabilir.
 
-Ancak, modern mikroişlemcilerde ALU ve akümülatör arasındaki bağlantı biraz daha karmaşık hale gelmiştir. Mikroişlemciler genellikle çoklu ALU'lara ve genel amaçlı kayıtlara (akümülatörün daha genelleştirilmiş bir versiyonu) sahiptir ve bu kayıtlar, çeşitli işlemler için gerekli verileri ve sonuçları tutmak için kullanılır. Bu, mikroişlemcilerin karmaşık işlemleri daha hızlı bir şekilde gerçekleştirmesine olanak sağlar.
-```
+- Örneğin, bir program, 5 ve 3'ün toplanmasını talep ettiğinde, bu sayılar ALU'ya aktarılır. ALU, bu iki sayıyı toplar ve sonucu (8) akümülatöre yazar. Bu değer daha sonra program tarafından talep edildiğinde akümülatörden alınabilir. Bu, ALU ve akümülatör arasındaki temel bağlantıyı örneklemektedir.
+
+- Ancak, modern mikroişlemcilerde ALU ve akümülatör arasındaki bağlantı biraz daha karmaşık hale gelmiştir. Mikroişlemciler genellikle çoklu ALU'lara ve genel amaçlı kayıtlara (akümülatörün daha genelleştirilmiş bir versiyonu) sahiptir ve bu kayıtlar, çeşitli işlemler için gerekli verileri ve sonuçları tutmak için kullanılır. Bu, mikroişlemcilerin karmaşık işlemleri daha hızlı bir şekilde gerçekleştirmesine olanak sağlar.
+
 
 
 
