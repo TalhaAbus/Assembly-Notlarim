@@ -285,9 +285,23 @@ PWM1H, PWM1L
 
 - Program sayacının işlevi, CPU'nun hangi komutu ne zaman işleyeceğini belirlemek olduğundan, program sayacı, bir bilgisayarın işlemlerini düzenli ve öngörülebilir bir şekilde sıralamasını sağlar.
 
+### WR (working register)
 
+- Working Register (WR), bir işlemcinin bir parçası olan ve genellikle işlemci tarafından gerçekleştirilen hesaplamalarda geçici veri depolama işlevi gören bir tür register'dir. İşlemcilerde farklı türdeki registerlar olabilir ve her biri belirli bir işlevi yerine getirir. Working register, genellikle ALU (Aritmetik ve Mantıksal Birim) tarafından işlenen veya işlemci tarafından erişilmesi gereken verileri saklar.
 
+- Working register'ın işleyişi genel olarak aşağıdaki gibi olabilir:
 
+1. Bir program, belirli bir hesaplama gerçekleştirmeyi talep eder. Örneğin, iki sayının toplanması talep edilebilir.
+
+2. Bu sayılar, hesaplamanın gerçekleştirileceği working register'a yüklenir.
+
+3. ALU, bu sayıları alır ve talep edilen işlemi (bu örnekte toplama) gerçekleştirir.
+
+4. ALU'nun hesaplama sonucu, genellikle sonucun daha sonra kullanılabilmesi için bir register'a (örneğin, bir accumulator'a) geri yazılır.
+
+5. Working register, aynı zamanda, hesaplama sonucunun bir sonraki işlemde kullanılmasını gerektiren durumlar için sonucu saklayabilir.
+
+- Yukarıdaki adımlar, bir working register'ın genel işleyişini açıklar, ancak belirtmek önemlidir ki, belirli bir işlemcinin veya bilgisayarın tasarımına bağlı olarak bu işleyiş değişebilir. Bazı sistemlerde, working register aynı zamanda bir akümülatör işlevi de görebilir. Diğer sistemlerde, bir veya daha fazla working register, genel amaçlı registerlar olarak hizmet verebilir ve bir dizi farklı işlem için veri saklayabilir.
 
 
 
