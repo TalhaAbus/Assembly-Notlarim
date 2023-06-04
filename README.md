@@ -333,7 +333,22 @@ PWM1H, PWM1L
 
 - Bu adımlar, stack pointer'ın genel işleyişini tanımlar. Ancak, belirli bir işlemci veya bilgisayar sisteminin tasarımına bağlı olarak bu işleyiş biraz değişebilir. Örneğin, bazı sistemlerde stack yukarı doğru büyür (yani, yeni öğeler daha yüksek bellek adreslerine eklenir), diğerlerinde ise aşağı doğru büyür. Bu durum, stack pointer'ın yeni öğeler eklenirken veya mevcut öğeler çıkarılırken nasıl hareket edeceğini belirler.
 
+### Alt programa girildiğinde stack Pointer ve Program counter?
 
+- Bir alt programa (subroutine veya function) girildiğinde genellikle bazı veriler stack bölgesine push edilir. Bu veriler genellikle mevcut program durumunu korumak için gereklidir, böylece alt program tamamlandığında ana programa dönebiliriz ve kaldığımız yerden devam edebiliriz.
+
+- Stack Pointer (SP) ve Program Counter (PC) bu süreçte önemli roller oynar:
+
+1. Stack Pointer (SP): SP, stack'teki en üst konumu işaret eder. Bir alt programa girerken, genellikle mevcut işlem durumunu korumak için bazı bilgiler stack'e push edilir. Bu bilgiler genellikle mevcut programın durumunu korumak için gereklidir ve stack pointer, yeni verinin stack'in neresine yerleştirileceğini belirler.
+
+2. Program Counter (PC): PC, bir alt programın başlangıç adresini içerir ve bu adres, PC'ye yüklenir. Sonrasında, işlemci alt programı çalıştırırken PC, sıradaki talimatın adresini saklar. Bir alt programa girerken genellikle PC'nin mevcut değeri stack'e push edilir. Bu, alt programdan döndüğümüzde, programın nerede kaldığını bilmemizi sağlar, çünkü PC'nin eski değerini stack'den pop edip PC'ye geri yükleriz.
+
+- Hangi verilerin stack'e push edileceği, kullanılan dil ve alt programın kendine özgü ihtiyaçlarına bağlıdır. Ancak, genellikle aşağıdaki türden veriler stack'e push edilir:
+
+1. **Çalışma zamanı değişkenler:** Bu değişkenler alt programın yerel değişkenleridir. Alt program tamamlandığında, bu değişkenler stack'den pop edilir ve yok olurlar.
+2. **Return adresi:** Alt programdan döndüğümüzde devam etmek için kullanılan adres. Genellikle alt programa girerken mevcut PC'nin değeri alınır ve stack'e push edilir.
+3. **Kaydedici durumları:** Alt programın çalışması sırasında değiştirilebilecek bazı işlemci register'ları. Bu register'ların durumları, alt programa girerken genellikle stack'e push edilir, böylece alt programdan döndüğümüzde bu durumları geri yükleyebiliriz.
+- Bu şekilde, alt programlar ve stack mekanizması, programın farklı bölümlerini etkin bir şekilde yönetmeyi ve işlem durumlarını korumayı sağlar.
 
 
 
