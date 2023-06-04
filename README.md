@@ -350,11 +350,21 @@ PWM1H, PWM1L
 3. **Kaydedici durumları:** Alt programın çalışması sırasında değiştirilebilecek bazı işlemci register'ları. Bu register'ların durumları, alt programa girerken genellikle stack'e push edilir, böylece alt programdan döndüğümüzde bu durumları geri yükleyebiliriz.
 - Bu şekilde, alt programlar ve stack mekanizması, programın farklı bölümlerini etkin bir şekilde yönetmeyi ve işlem durumlarını korumayı sağlar.
 
+### Watchdog Timer
 
+- Bir Watchdog Timer (WDT), bir mikroişlemci sistemini izleyen ve belirli bir süre boyunca herhangi bir etkinlik olmazsa, genellikle bir yazılım hata veya donma durumu nedeniyle, sistemi yeniden başlatan veya başka bir işlem gerçekleştiren bir tür donanım zamanlayıcıdır.
 
+- Watchdog timer'ın çalışma prensibi genellikle şöyledir:
 
+1. Yazılım, watchdog timer'ı belirli bir zaman aralığı ile başlatır (resetler).
 
+2. Eğer belirlenen zaman aralığında yazılım tarafından timer resetlenmezse, bu durum genellikle yazılımda bir hata olduğu anlamına gelir (örneğin, bir süreç takılmıştır veya bir döngü sonsuz döngüye girmiştir).
 
+3. Watchdog timer zaman aşımına uğradığında, bir "watchdog bite" (watchdog ısırığı) oluşur. Bu, genellikle sistemi yeniden başlatan veya belirli bir donanım parçasını sıfırlayan bir işlemi tetikler. Bu, sistemin tekrar düzgün çalışması için genellikle hatalı durumdan kurtulmasına yardımcı olur.
+
+- Bu süreç, sürekli devam eder ve genellikle yazılımın düzenli aralıklarla watchdog timer'ı resetlemesi gerektirir. Bu genellikle belirli bir komut veya işlem kullanılarak yapılır.
+
+- Watchdog timer'lar, özellikle gömülü sistemlerde yaygın olarak kullanılır, çünkü bu sistemler genellikle uzun süreler boyunca güvenilir bir şekilde çalışmalı ve potansiyel yazılım hatalarına karşı dayanıklı olmalıdır. Bununla birlikte, doğru kullanıldığında, watchdog timer'lar bir bilgisayar sisteminin genel güvenilirliğini ve dayanıklılığını büyük ölçüde artırabilir.
 
 
 
